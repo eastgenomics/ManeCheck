@@ -11,7 +11,8 @@ parser.add_argument(
 parser.add_argument(
     '--verbose', action='store_true',
     help=(
-        'if selected, prints the results in dictionary form for every variant in the input file.'
+        'if selected, prints the results in dictionary form for every \
+            variant in the input file.'
         )
     )
 args = parser.parse_args()
@@ -47,10 +48,17 @@ for record in vcf_reader:
     if unique_mane_clinical:
         mane_clinical_count = mane_clinical_count + 1
 
-    results[str(record)] = {'ensembl_ids': set(ensembl_id), 'mane_select_ids':unique_mane_select, 'mane_clinical_ids':unique_mane_clinical}
+    results[str(record)] = {'ensembl_ids': set(ensembl_id),
+                            'mane_select_ids': unique_mane_select,
+                            'mane_clinical_ids': unique_mane_clinical}
 
+sep = '###############################################################'
 
-print(f'###############################################################\nTotal records: {record_count}, No. MANE Select: {mane_select_count}, No. MANE Clinical: {mane_clinical_count}\n###############################################################')
+print(
+    f'{sep}\nTotal records: {record_count}, \
+No. MANE Select: {mane_select_count}, \
+No. MANE Clinical: {mane_clinical_count}\n{sep}'
+)
 
 if args.verbose:
     for key, value in results.items():
