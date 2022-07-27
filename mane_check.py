@@ -8,6 +8,12 @@ parser.add_argument(
         'filename of VCF (VEP annotated with MANE option).'
         )
     )
+parser.add_argument(
+    '--verbose', action='store_true',
+    help=(
+        'if selected, prints the results in dictionary form for every variant in the input file.'
+        )
+    )
 args = parser.parse_args()
 
 
@@ -46,5 +52,6 @@ for record in vcf_reader:
 
 print(f'###############################################################\nTotal records: {record_count}, No. MANE Select: {mane_select_count}, No. MANE Clinical: {mane_clinical_count}\n###############################################################')
 
-for key, value in results.items():
-    print(key, '\t', value)
+if args.verbose:
+    for key, value in results.items():
+        print(key, '\t', value)
